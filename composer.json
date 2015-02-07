@@ -1,0 +1,36 @@
+{
+    "name": "ritaco/accunting",
+    "description": "Accunting plugin for CakePHP",
+    "type": "cakephp-plugin",
+    "keywords": ["cakephp",  "Accunting", "Money", "payment"],
+    "version": "3.0.0-dev"
+    "authors": [
+        {
+            "name": "Saleh Souzanchi",
+            "role": "Author",
+            "homepage": "http://www.ritaco.net"
+        }
+    ],
+    "support":{
+        "source": "https://github.com/RitaCo/rita-core",
+        "issues": "https://github.com/RitaCo/rita-core/issues"
+    },
+    "require": {
+        "php": ">=5.4",
+        "cakephp/cakephp": "3.0.x-dev"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Accunting\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Accunting\\Test\\": "tests",
+            "Cake\\Test\\": "./vendor/cakephp/cakephp/tests"
+        }
+    }
+}

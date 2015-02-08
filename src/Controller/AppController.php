@@ -1,6 +1,5 @@
 <?php
-
-namespace Accunting\Controller;
+namespace Rita\Accunting\Controller;
 
 use App\Controller\AppController as BaseController;
 

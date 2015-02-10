@@ -9,19 +9,15 @@ Router::prefix('admin', function($routes){
     });
 });
 
-Router::scope('/', function ($routes) {
 
 
-});
-
-
-Router::prefix('client', function($routes)
-{
+Router::prefix('client', function($routes){
      
-  $routes->plugin('Rita/Accunting', [ 'path' => '/accunting'], function($routes) {
-             $routes->connect('/', ['controller' => 'reports','action' => 'index']);
+    $routes->plugin('Rita/Accunting', [ 'path' => '/accunting'], function($routes)
+    {
+        $routes->connect('/', ['controller' => 'DashBoard','action' => 'index'],['_name' => 'Accunting']);
         $routes->fallbacks('InflectedRoute');
-        
-    });
     
+    });
+
 });

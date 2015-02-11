@@ -1,5 +1,5 @@
 <?php
-namespace Rita\Accunting\Controller;
+namespace Rita\Accounting\Controller;
 
 use App\Controller\AppController as BaseController;
 

@@ -1,8 +1,8 @@
 {
-    "name": "ritaco/accunting",
-    "description": "Accunting plugin for CakePHP",
+    "name": "ritaco/accounting",
+    "description": "Accounting plugin for CakePHP",
     "type": "cakephp-plugin",
-    "homepage": "https://github.com/RitaCo/cakephp-accunting-plugin",
+    "homepage": "https://github.com/RitaCo/cakephp-accounting-plugin",
     "keywords": ["cakephp",  "Accunting", "Money", "payment"],
     "version": "3.0.0-dev",
     "authors": [
@@ -13,8 +13,8 @@
         }
     ],
     "support":{
-        "source": "https://github.com/RitaCo/cakephp-accunting-plugin",
-        "issues": "https://github.com/RitaCo/cakephp-accunting-plugin/issues"
+        "source": "https://github.com/RitaCo/cakephp-accounting-plugin",
+        "issues": "https://github.com/RitaCo/cakephp-accounting-plugin/issues"
     },
     "require": {
         "php": ">=5.4",
@@ -25,16 +25,16 @@
     },
     "autoload": {
         "psr-4": {
-            "Accunting\\": "src"
+            "Accounting\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Accunting\\Test\\": "tests",
+            "Accounting\\Test\\": "tests",
             "Cake\\Test\\": "./vendor/cakephp/cakephp/tests"
         }
     },
     "extra": {
-        "installer-name": "Rita/Core"
+        "installer-name": "Rita/Accounting"
     }        
 }

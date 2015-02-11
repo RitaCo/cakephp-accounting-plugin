@@ -1,7 +1,7 @@
 <?php
-namespace Rita\Accunting\Controller\Admin;
+namespace Rita\Accounting\Controller\Admin;
 
-use Rita\Accunting\Controller\AppController;
+use Rita\Accounting\Controller\AppController;
 
 /**
  * Dashboard Controller

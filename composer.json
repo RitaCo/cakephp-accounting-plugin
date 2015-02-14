@@ -18,8 +18,7 @@
     },
     "require": {
         "php": ">=5.4",
-        "cakephp/cakephp": "3.0.x-dev",
-        "fergusean/nusoap": "dev-master"
+        "cakephp/cakephp": "3.0.x-dev"
     },
     "require-dev": {
         "phpunit/phpunit": "*"

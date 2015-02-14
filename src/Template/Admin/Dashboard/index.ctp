@@ -10,7 +10,7 @@ $this->assign('note','تمامی عملیات‌های مالی در این بخ
 
 <div id="ActionInDashBoard">
 
-    <?= $this->Html->linkIcon('اعضا','  fa fa-users',['controller' => 'Notices']); ?>
+    <?= $this->Html->linkIcon('تراکنش‌ها','  fa fa-exchange',['controller' => 'Transactions']); ?>
     <?= $this->Html->linkIcon('نقش‌ها','  icon-list-alt',['controller' => 'Notices']); ?>
     <?= $this->Html->linkIcon('تنظیمات','  icon-list-alt',['controller' => 'Notices']); ?>
 

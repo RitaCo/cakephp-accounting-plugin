@@ -25,12 +25,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Accounting\\": "src"
+            "Rita\\Accounting\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Accounting\\Test\\": "tests",
+            "Rita\\Accounting\\Test\\": "tests",
             "Cake\\Test\\": "./vendor/cakephp/cakephp/tests"
         }
     },

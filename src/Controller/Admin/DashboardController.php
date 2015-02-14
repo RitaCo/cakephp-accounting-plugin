@@ -3,16 +3,17 @@ namespace Rita\Accounting\Controller\Admin;
 
 use Rita\Accounting\Controller\AppController;
 
-/**
- * Dashboard Controller
- *
- * @property RequirementsManager\Model\Table\DashboardTable $Dashboard
- */
-class DashboardController extends AppController
+class DashBoardController extends AppController
 {
+    
+    
+    /**
+     * DashBoardController::index()
+     * 
+     * @return void
+     */
+    public function index()
+    {
 
-    public function index(){
-        
     }
- 
 }

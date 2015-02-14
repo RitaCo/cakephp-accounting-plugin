@@ -36,6 +36,7 @@ class AccountsTable extends Table
         ]);
     }
 
+
     /**
      * Default validation rules.
      *
@@ -52,15 +53,18 @@ class AccountsTable extends Table
             ->add('type_id', 'valid', ['rule' => 'numeric'])
             ->requirePresence('type_id', 'create')
             ->notEmpty('type_id')
-            ->add('in', 'valid', ['rule' => 'numeric'])
-            ->requirePresence('in', 'create')
-            ->notEmpty('in')
-            ->add('out', 'valid', ['rule' => 'numeric'])
-            ->requirePresence('out', 'create')
-            ->notEmpty('out')
             ->add('system', 'valid', ['rule' => 'boolean'])
             ->requirePresence('system', 'create')
-            ->notEmpty('system');
+            ->notEmpty('system')
+            ->add('master', 'valid', ['rule' => 'boolean'])
+            ->requirePresence('master', 'create')
+            ->notEmpty('master')
+            ->add('status', 'valid', ['rule' => 'boolean'])
+            ->requirePresence('status', 'create')
+            ->notEmpty('status')
+            ->add('amount', 'valid', ['rule' => 'numeric'])
+            ->requirePresence('amount', 'create')
+            ->notEmpty('amount');
 
         return $validator;
     }
@@ -78,7 +82,6 @@ class AccountsTable extends Table
         $rules->add($rules->existsIn(['type_id'], 'Types'));
         return $rules;
     }
-    
     
     
     

@@ -49,8 +49,8 @@ class AccountingAccountsFixture extends TestFixture
             'master' => 1,
             'status' => 1,
             'amount' => 1,
-            'created' => '2015-02-14 08:04:02',
-            'modified' => '2015-02-14 08:04:02'
+            'created' => '2015-02-14 09:17:40',
+            'modified' => '2015-02-14 09:17:40'
         ],
     ];
 }

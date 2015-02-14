@@ -24,15 +24,16 @@ class TransactionsTable extends Table
         $this->table('accounting_transactions');
         $this->displayField('id');
         $this->primaryKey('id');
-        $this->belongsTo('Senders', [
-            'foreignKey' => 'of_id',
+        $this->belongsTo('Transmitters', [
+            'foreignKey' => 'transmitter_id',
             'className' => 'Rita/Accounting.Accounts'
         ]);
-        $this->belongsTo('Receivers', [
-            'foreignKey' => 'to_id',
+        $this->belongsTo('Getters', [
+            'foreignKey' => 'getter_id',
             'className' => 'Rita/Accounting.Accounts'
-        ]);
+        ]);        
     }
+
 
     /**
      * Default validation rules.
@@ -45,28 +46,22 @@ class TransactionsTable extends Table
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
             ->allowEmpty('id', 'create')
-            ->requirePresence('type', 'create')
-            ->notEmpty('type')
-            ->add('of_id', 'valid', ['rule' => 'numeric'])
-            ->requirePresence('of_id', 'create')
-            ->notEmpty('of_id')
-            ->add('to_id', 'valid', ['rule' => 'numeric'])
-            ->requirePresence('to_id', 'create')
-            ->notEmpty('to_id')
-            ->add('in', 'valid', ['rule' => 'numeric'])
-            ->requirePresence('in', 'create')
-            ->notEmpty('in')
-            ->add('out', 'valid', ['rule' => 'numeric'])
-            ->requirePresence('out', 'create')
-            ->notEmpty('out')
-            ->add('amount', 'valid', ['rule' => 'numeric'])
-            ->allowEmpty('amount')
+            ->add('transmitter_id', 'valid', ['rule' => 'numeric'])
+            ->requirePresence('transmitter_id', 'create')
+            ->notEmpty('transmitter_id')
+            ->add('getter_id', 'valid', ['rule' => 'numeric'])
+            ->requirePresence('getter_id', 'create')
+            ->notEmpty('getter_id')
+            ->add('amount_in', 'valid', ['rule' => 'numeric'])
+            ->requirePresence('amount_in', 'create')
+            ->notEmpty('amount_in')
+            ->add('amount_out', 'valid', ['rule' => 'numeric'])
+            ->requirePresence('amount_out', 'create')
+            ->notEmpty('amount_out')
+            ->add('amount_total', 'valid', ['rule' => 'numeric'])
+            ->allowEmpty('amount_total')
             ->add('accepted', 'valid', ['rule' => 'boolean'])
             ->allowEmpty('accepted')
-            ->add('date', 'valid', ['rule' => 'date'])
-            ->allowEmpty('date')
-            ->add('time', 'valid', ['rule' => 'time'])
-            ->allowEmpty('time')
             ->allowEmpty('note');
 
         return $validator;
@@ -81,8 +76,24 @@ class TransactionsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['of_id'], 'Ofs'));
-        $rules->add($rules->existsIn(['to_id'], 'Tos'));
+        $rules->add($rules->existsIn(['transmitter_id'], 'Transmitters'));
+        $rules->add($rules->existsIn(['getter_id'], 'Getters'));
         return $rules;
+    }
+
+
+
+
+    public function findTransaction(Query $query, array $options)
+    {
+        if (empty($options['for'])) {
+            throw new \InvalidArgumentException("The 'for' key is required for find('Accounts')");
+        }        
+        return $query->where([
+            'OR' => [
+                'getter_id' => $options['for'],
+                'transmitter_id' => $options['for'] 
+            ]
+        ]);
     }
 }

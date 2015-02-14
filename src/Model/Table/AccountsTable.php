@@ -85,6 +85,13 @@ class AccountsTable extends Table
     
     
     
+    /**
+     * AccountsTable::findAccounts()
+     * 
+     * @param mixed $query
+     * @param mixed $options
+     * @return
+     */
     public function findAccounts(Query $query, array $options)
     {
         if (empty($options['for'])) {
@@ -92,4 +99,8 @@ class AccountsTable extends Table
         }        
         return $query->where(['user_id' => $options['for']])->contain('Types');
     }
+    
+    
+    
+    
 }

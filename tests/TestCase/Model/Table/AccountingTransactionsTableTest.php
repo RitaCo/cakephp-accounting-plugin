@@ -18,8 +18,8 @@ class AccountingTransactionsTableTest extends TestCase
      */
     public $fixtures = [
         'AccountingTransactions' => 'plugin.rita/accounting.accounting_transactions',
-        'Ofs' => 'plugin.rita/accounting.ofs',
-        'Tos' => 'plugin.rita/accounting.tos'
+        'Transmitters' => 'plugin.rita/accounting.transmitters',
+        'Getters' => 'plugin.rita/accounting.getters'
     ];
 
     /**

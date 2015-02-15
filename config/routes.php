@@ -16,7 +16,12 @@ Router::prefix('client', function($routes){
     $routes->plugin('Rita/Accounting', [ 'path' => '/accounting-manager'], function($routes) {
         $routes->connect('/', ['controller' => 'Accounts','action' => 'index'],['_name' => 'Accounting']);
         $routes->connect('/transactions/*', ['controller' => 'Transactions','action' => 'index']);
-       // $routes->fallbacks();
+        $routes->connect('/payments/:id', ['controller' => 'Payments','action' => 'index'],['id' => '[0-9]+']);
+        
+        $routes->connect('/payments/:action/*', ['controller' => 'Payments']);
+        
+
+//        $routes->fallbacks();
         
     });
 

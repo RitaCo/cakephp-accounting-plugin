@@ -1,7 +1,7 @@
 <?php
 namespace Rita\Accounting\Model\Entity;
 
-use Cake\ORM\Entity;
+use Rita\Core\ORM\Entity;
 
 /**
  * AccountingAccount Entity.

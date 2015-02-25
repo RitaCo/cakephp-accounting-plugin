@@ -3,8 +3,9 @@ namespace Rita\Accounting\Model\Table;
 
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
-use Cake\ORM\Table;
+
 use Cake\Validation\Validator;
+use Rita\Core\ORM\Table;
 use Rita\Accounting\Model\Entity\AccountingType;
 
 /**

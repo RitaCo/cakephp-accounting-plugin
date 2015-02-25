@@ -3,8 +3,8 @@ namespace Rita\Accounting\Model\Table;
 
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
-use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Rita\Core\ORM\Table;
 use Rita\Accounting\Model\Entity\AccountingPayment;
 
 /**
@@ -24,7 +24,7 @@ class PaymentsTable extends Table
         $this->table('accounting_payments');
         $this->displayField('id');
         $this->primaryKey('id');
-        $this->addBehavior('Timestamp');
+        
         $this->belongsTo('Accounts', [
             'foreignKey' => 'account_id',
             'className' => 'Rita/Accounting.Accounts'

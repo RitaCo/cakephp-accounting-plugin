@@ -3,8 +3,9 @@ namespace Rita\Accounting\Model\Table;
 
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
-use Cake\ORM\Table;
 use Cake\Validation\Validator;
+
+use Rita\Core\ORM\Table;
 use Rita\Accounting\Model\Entity\AccountingTransaction;
 
 /**
@@ -24,6 +25,7 @@ class TransactionsTable extends Table
         $this->table('accounting_transactions');
         $this->displayField('id');
         $this->primaryKey('id');
+        
         $this->belongsTo('Transmitters', [
             'foreignKey' => 'transmitter_id',
             'className' => 'Rita/Accounting.Accounts'

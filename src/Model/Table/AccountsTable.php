@@ -3,9 +3,9 @@ namespace Rita\Accounting\Model\Table;
 
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
-use Cake\ORM\Table;
 use Cake\Validation\Validator;
 use Cake\Core\Configure;
+use Rita\Core\ORM\Table;
 use Rita\Accounting\Model\Entity\AccountingAccount;
 
 /**
@@ -26,10 +26,12 @@ class AccountsTable extends Table
         $this->table('accounting_accounts');
         $this->displayField('id');
         $this->primaryKey('id');
+        
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',
             'className' => Configure::write('Rita.Accounting.userTable')
         ]);
+        
         $this->belongsTo('Types', [
             'foreignKey' => 'type_id',
             'className' => 'Rita/Accounting.Types'

@@ -31,7 +31,7 @@ foreach($accounts as $account):
         </div>
         <div class="body-footer ">
                     <?= $this->Html->linkIcon('تراکنش',' icon-report',['controller' => 'Transactions','action' => 'index', $account->id],['class' => 'btn ']); ?>
-                    <?= $this->Html->linkIcon('افزایش اعتبار',' icon-report',['controller' => 'Payments','action' => 'index', $account->id],['class' => 'btn ']); ?>
+                    <?= $this->Html->linkIcon('افزایش اعتبار',' icon-report',['controller' => 'Payments', $account->id],['class' => 'btn ']); ?>
         </div>
     </div>
 </div>

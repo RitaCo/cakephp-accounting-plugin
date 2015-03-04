@@ -29,7 +29,7 @@ class AccountsTable extends Table
         
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',
-            'className' => Configure::write('Rita.Accounting.userTable')
+            'className' => Configure::write('Rita/Users.Users')
         ]);
         
         $this->belongsTo('Types', [
@@ -104,5 +104,9 @@ class AccountsTable extends Table
     
     
     
+    public function createAccunt($userId, $type = 'WALLET' , $value = 0 )
+    {
+        
+    }
     
 }

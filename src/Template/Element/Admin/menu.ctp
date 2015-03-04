@@ -5,9 +5,9 @@
 	</a>
     <ul class="menu-submenu">
 		<li>
-			<a href="/admin/Accounting/">
+			<a href="<?= $this->Url->build(['plugin' => 'Rita/Accounting', 'controller' =>'Accounts','action' => 'found'])?>">
 				<div class="icon"><i class=" icon-money-cash"></i></div>
-				<div class="label"><span>حسابداری</span></div>
+				<div class="label"><span>صندوق</span></div>
 			</a>
 		</li>
 	   

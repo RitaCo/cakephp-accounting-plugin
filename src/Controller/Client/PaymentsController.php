@@ -1,6 +1,7 @@
 <?php
 namespace Rita\Accounting\Controller\Client;
 use Cake\Network\Http\Client;
+use Cake\Event\Event;
 use Rita\Accounting\Controller\AppController;
 
 /**
@@ -17,10 +18,11 @@ class PaymentsController extends AppController
       * @param mixed $event
       * @return void
       */
-     public function beforeFilter(Event $event)
+    public function beforeFilter(Event $event)
     {
           parent::beforeFilter($event);
-            $this->Auth->allow('verify');   
+            $this->Auth->allow('verify');
+            $this->userId = $user = $this->Auth->user('id');   
     }
     
 
@@ -41,30 +43,31 @@ class PaymentsController extends AppController
      */
     public function index($id)
     {
-        $user = $this->Auth->user('id');
+
         
-        $res = $this->Payments->Accounts->exists(['user_id' => $user, 'id' => $id]);
+        $res = $this->Payments->Accounts->exists(['user_id' => $this->userId, 'id' => $id]);
+        
         if(!$res) {
             $this->Flash->error('حساب مورد نظر معتبر نیست.');
             $this->redirect(['_name' => 'Accounting']);
         }
         
         
-        $payment = $this->Payments->newEntity();
-        
-        if ($this->request->is('post')) {
-            $payment = $this->Payments->patchEntity($payment, $this->request->data,['fieldList' => ['account_id','bank_id','value']]);
-            $payment->account_id = $id;
-            
-            if ($this->Payments->save($payment)) {
-                $this->Flash->success('The account has been saved.');
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error('The account could not be saved. Please, try again.');
-            }
-        }
-        $this->set('payment',$payment);
-         $this->_pay();       
+        //$payment = $this->Payments->newEntity();
+//        
+//        if ($this->request->is('post')) {
+//            $payment = $this->Payments->patchEntity($payment, $this->request->data,['fieldList' => ['account_id','bank_id','value']]);
+//            $payment->account_id = $id;
+//            
+//            if ($this->Payments->save($payment)) {
+//                $this->Flash->success('The account has been saved.');
+//                return $this->redirect(['action' => 'index']);
+//            } else {
+//                $this->Flash->error('The account could not be saved. Please, try again.');
+//            }
+//        }
+//        $this->set('payment',$payment);
+//         $this->_pay();       
     }
     
     

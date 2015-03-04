@@ -21,16 +21,11 @@ class AccountsController extends AppController
         $this->set('_serialize', ['accounts']);
     }
 
-    /**
-     * View method
-     *
-     * @param string|null $id Account id.
-     * @return void
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
-    public function view($id = null)
+
+
+    public function found()
     {
-        $account = $this->Accounts->get($id, [
+        $account = $this->Accounts->get(1, [
             'contain' => []
         ]);
         $this->set('account', $account);

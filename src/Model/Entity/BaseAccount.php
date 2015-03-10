@@ -6,11 +6,11 @@ use Rita\Core\ORM\Entity;
 /**
  * AccountingAccount Entity.
  */
-class Account extends Entity
+class BaseAccount extends Entity
 {
     
     
-    const ACC_FOUND  = 'FOUND';
+   
     const ACC_BANK   = 'BANK';
     const ACC_WALLET = 'WALLET';
     

@@ -1,9 +1,31 @@
 <?php
 use Cake\Routing\Router;
 
-Router::prefix('admin', function($routes){
-    $routes->plugin('Rita/Accounting', [ 'path' => '/accounting-manager'], function($routes) {
+Router::prefix('admin', function($routes)
+{
+    $routes->plugin('Rita/Accounting', [ 'path' => '/accounting-manager'], function($routes)
+    {
         $routes->connect('/', ['controller' => 'DashBoard','action' => 'index'],[]);
+
+        $routes->connect(
+            '/:controller/:type',
+            ['action' => 'index'],
+            [
+           
+             'type' => 'system|client',
+             'pass' => ['type']   
+            ]
+        );
+
+        $routes->connect(
+            '/:controller/:type/:action/*',
+            [],
+            [
+             'type' => 'system|client',
+             'pass' => ['type']   
+            ]
+        );
+        
         $routes->fallbacks();
         
     });

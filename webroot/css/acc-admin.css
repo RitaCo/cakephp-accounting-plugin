@@ -1,0 +1,22 @@
+#TotalFound {
+  width: 30%;
+  background-color: #6F92B0;
+  padding: 10px;
+  margin: 0px auto;
+  box-shadow: 2px 2px 2px 0px #aaa;
+}
+#TotalFound span {
+  display: block;
+  text-align: center;
+  font-family: wtraffic;
+  color: #fff;
+  font-size: 25px;
+}
+#TotalFound p {
+  display: block;
+  text-align: center;
+  font-family: wMitra;
+  font-weight: bold;
+  color: #fff;
+  font-size: 25px;
+}

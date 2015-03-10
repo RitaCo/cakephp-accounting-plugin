@@ -1,14 +1,37 @@
 <?php
 namespace Rita\Accounting\Controller\Admin;
 
+use Cake\Event\Event;
 use Rita\Accounting\Controller\AppController;
 
-/**
- * Accounts Controller
- *
- * @property \Rita\Accounting\Model\Table\AccountsTable $Accounts */
-class AccountsController extends AppController
+
+
+  class BaseAccountController extends AppController
 {
+    
+    
+
+    protected $name4view;
+    protected $typeAcc;
+    protected $userId;
+
+    /**
+     * BaseAccountController::beforeFilter()
+     * 
+     * @param mixed $event
+     * @return void
+     */
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+        $this->accuntName = strtolower($this->name);
+        $this->typeAcc = $this->request->param('type');
+        $this->{$this->name}->filterType($this->typeAcc);
+        $this->view =  $this->typeAcc.'_'.$this->request->param('action');
+        
+        $this->userId = ($this->accuntName === 'funds')? -1 : $this->Auth->user('id');
+          
+    }
 
     /**
      * Index method
@@ -17,18 +40,22 @@ class AccountsController extends AppController
      */
     public function index()
     {
-        $this->set('accounts', $this->paginate($this->Accounts));
-        $this->set('_serialize', ['accounts']);
+        
+        $this->set('userId', $this->userId);
+        $this->set('CashBalance', 0);
+        $this->set($this->accuntName, $this->paginate($this->{$this->name}));
+        $this->set('_serialize', [$this->accuntName]);
     }
 
 
 
     public function found()
     {
-        $account = $this->Accounts->get(1, [
+        
+        $account = $this->{$this->name}->get(1, [
             'contain' => []
         ]);
-        $this->set('account', $account);
+        $this->set('CashBalance', 0);
         $this->set('_serialize', ['account']);
     }
 
@@ -41,8 +68,8 @@ class AccountsController extends AppController
     {
         $account = $this->Accounts->newEntity();
         if ($this->request->is('post')) {
-            $account = $this->Accounts->patchEntity($account, $this->request->data);
-            if ($this->Accounts->save($account)) {
+            $account = $this->{$this->name}->patchEntity($account, $this->request->data);
+            if ($this->{$this->name}->save($account)) {
                 $this->Flash->success('The account has been saved.');
                 return $this->redirect(['action' => 'index']);
             } else {
@@ -62,12 +89,12 @@ class AccountsController extends AppController
      */
     public function edit($id = null)
     {
-        $account = $this->Accounts->get($id, [
+        $account = $this->{$this->name}->get($id, [
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $account = $this->Accounts->patchEntity($account, $this->request->data);
-            if ($this->Accounts->save($account)) {
+            $account = $this->{$this->name}->patchEntity($account, $this->request->data);
+            if ($this->{$this->name}->save($account)) {
                 $this->Flash->success('The account has been saved.');
                 return $this->redirect(['action' => 'index']);
             } else {
@@ -88,8 +115,8 @@ class AccountsController extends AppController
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
-        $account = $this->Accounts->get($id);
-        if ($this->Accounts->delete($account)) {
+        $account = $this->{$this->name}->get($id);
+        if ($this->{$this->name}->delete($account)) {
             $this->Flash->success('The account has been deleted.');
         } else {
             $this->Flash->error('The account could not be deleted. Please, try again.');

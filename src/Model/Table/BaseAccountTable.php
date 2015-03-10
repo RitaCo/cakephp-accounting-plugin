@@ -5,14 +5,19 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\Validation\Validator;
 use Cake\Core\Configure;
+use Cake\Event\Event;
 use Rita\Core\ORM\Table;
-use Rita\Accounting\Model\Entity\AccountingAccount;
+use Rita\Accounting\Model\Table\Exception\MissingAccountTypeException;
 
 /**
  * AccountingAccounts Model
  */
-class AccountsTable extends Table
+class BaseAccountTable extends Table
 {
+    
+    const ACC_TYPE  = null;
+
+    protected $filterType = false;
 
     /**
      * Initialize method
@@ -85,7 +90,47 @@ class AccountsTable extends Table
         return $rules;
     }
     
+
+    /**
+     * BaseAccountTable::beforeFind()
+     * 
+     * @param mixed $event
+     * @param mixed $query
+     * @param mixed $options
+     * @param mixed $primary
+     * @return
+     */
+    public function	beforeFind(Event $event, Query $query, \ArrayObject $options, $primary)
+    {
+        if(static::ACC_TYPE === null) {
+            throw new MissingAccountTypeException([]);
+        }
+        
+        $query = parent::beforeFind($event, $query, $options, $primary);
+        $query->where(['type' => static::ACC_TYPE, 'system' => $this->filterType]);
+        return $query;
+    }
+
+
+    public function beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options)
+    {
+        $data->system = $this->filterType;
+        $data->type = self::ACC_TYPE;
+    }
+
     
+    /**
+     * BaseAccountTable::filterType()
+     * 
+     * @param mixed $name
+     * @return void
+     */
+    public function filterType($name)
+    {
+        $this->filterType = ($name === 'system')? true : false;
+    }
+
+
     
     /**
      * AccountsTable::findAccounts()
@@ -99,7 +144,7 @@ class AccountsTable extends Table
         if (empty($options['for'])) {
             throw new \InvalidArgumentException("The 'for' key is required for find('Accounts')");
         }        
-        return $query->where(['user_id' => $options['for']])->contain('Types');
+        return $query->where(['user_id' => $options['for'],''])->contain('Types');
     }
     
     
